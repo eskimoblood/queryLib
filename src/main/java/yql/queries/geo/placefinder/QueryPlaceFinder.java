@@ -18,12 +18,13 @@ import yql.pojos.geo.placefinder.PlaceFinderResult;
 import yql.queries.Query;
 import yql.queries.QueryCommand;
 
-public class QueryPlaceFinder extends IsQuery {
+public class QueryPlaceFinder {
 
 	public static Query<PlaceFinder> createQueryByText(String text) {
 		String queryString = ("text=\"" + text + "\"");
 
-		return new Query<PlaceFinder>(Table.GEO_PLACEFINDER, queryString, getCommand());
+		return new Query<PlaceFinder>(Table.GEO_PLACEFINDER, queryString,
+				getCommand());
 	}
 
 	private static QueryCommand<PlaceFinder> getCommand() {

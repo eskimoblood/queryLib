@@ -11,24 +11,24 @@ public class QueryTest extends TestCase {
 
 	@Test
 	public void test() {
-		Query q1 = new Query(Table.GEO_PLACE, "text=\"test\"", null);
+		Query q1 = new Query(Table.GEO_PLACES, "text=\"test\"", null);
 
 		assertEquals(q1.toString(),
 				"SELECT * FROM geo.place WHERE text=\"test\"");
 
 		String[] what = { "a", "b" };
-		q1 = new Query(what, Table.GEO_PLACE, "text=\"test\"");
+		q1 = new Query(what, Table.GEO_PLACES, "text=\"test\"");
 
 		assertEquals(q1.toString(),
 				"SELECT a, b FROM geo.place WHERE text=\"test\"");
 
-		Query q2 = new Query(Table.GEO_PLACE, q1);
+		Query q2 = new Query(Table.GEO_PLACES, q1);
 
 		assertEquals(
 				q2.toString(),
 				"SELECT * FROM geo.place WHERE IN (SELECT a, b FROM geo.place WHERE text=\"test\")");
 
-		q2 = new Query(what, Table.GEO_PLACE, q1);
+		q2 = new Query(what, Table.GEO_PLACES, q1);
 		assertEquals(
 				q2.toString(),
 				"SELECT a, b FROM geo.place WHERE IN (SELECT a, b FROM geo.place WHERE text=\"test\")");

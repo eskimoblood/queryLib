@@ -10,7 +10,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-import yql.IsQuery;
 import yql.Table;
 import yql.pojos.Response;
 import yql.pojos.geo.placefinder.PlaceFinder;

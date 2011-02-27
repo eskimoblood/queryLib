@@ -80,126 +80,124 @@ public class QueryPlace {
 	}
 
 	private static Query<PlaceListResult> getListQuery(String query) {
-		return new Query<PlaceListResult>(Table.GEO_PLACE, query,
+		return new Query<PlaceListResult>(Table.GEO_PLACES, query,
 				getListCommand());
 	}
 
-	// /**
-	// * Query against the geo.places.parent table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static Place getPlaceParent(int woeid) {
-	// return queryPlace(Table.GEO_PLACE_PARENT, "child_woeid=\"" + woeid
-	// + "\"");
-	// }
-	//
-	// /**
-	// * Query against the geo.places.belongtos table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static List<Place> getPlaceBelongtos(int woeid) {
-	// return queryPlaceList(Table.GEO_PLACES_BELONGSTOS, "member_woeid=\""
-	// + woeid + "\"");
-	// }
-	//
-	// public static List<Place> getPlaceBelongtos(int woeid, PlaceTypes place)
-	// {
-	// return queryPlaceList(Table.GEO_PLACES_BELONGSTOS, "member_woeid=\""
-	// + woeid + "\" and placetype=\"" + place + "\"");
-	// }
-	//
-	// /**
-	// * Query against the geo.places.children table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static List<Place> getPlaceChildren(int woeid) {
-	// return queryPlaceList(Table.GEO_PLACES_CHILDREN, "member_woeid=\""
-	// + woeid + "\"");
-	// }
-	//
-	// public static List<Place> getPlaceChildren(int woeid, PlaceTypes place) {
-	// return queryPlaceList(Table.GEO_PLACES_CHILDREN, "member_woeid=\""
-	// + woeid + "\" and placetype=\"" + place + "\"");
-	// }
-	//
-	// /**
-	// * Query against the geo.places.common table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static List<Place> getPlaceCommon(int[] woeids) {
-	// int l = woeids.length;
-	// StringBuffer sb = new StringBuffer();
-	// if (l < 2 || l > 7) {
-	// throw new IllegalArgumentException(
-	// "the query needs 2 woeids min and max 7");
-	// }
-	// for (int i = 0; i < woeids.length; i++) {
-	// sb.append(" woeid" + i + "=\"");
-	// sb.append(woeids[i] + "\"");
-	// if (i < l - 1) {
-	// sb.append(" and ");
-	// }
-	//
-	// }
-	//
-	// return queryPlaceList(Table.GEO_PLACES_COMMON, "member_woeid=\"" + sb
-	// + "\"");
-	// }
-	//
-	// public static List<Place> getPlaceCommon(int woeid, PlaceTypes place) {
-	// return queryPlaceList(Table.GEO_PLACES_COMMON, "member_woeid=\""
-	// + woeid + "\" and placetype=\"" + place + "\"");
-	// }
-	//
-	// /**
-	// * Query against the geo.places.ancestors table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static List<Place> getPlaceAncestors(int woeid) {
-	// return queryPlaceList(Table.GEO_PLACES_ANCESTORS, "descendant_woeid=\""
-	// + woeid + "\"");
-	// }
-	//
-	// /**
-	// * Query against the geo.places.n table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static List<Place> getPlaceNeighbor(int woeid) {
-	// return queryPlaceList(Table.GEO_PLACES_NEIGHBORS, "neighbor_woeid=\""
-	// + woeid + "\"");
-	// }
-	//
-	// /**
-	// * Query against the geo.places.ancestors table
-	// *
-	// * @param woeid
-	// * @return
-	// */
-	// public static List<Place> getPlaceSibling(int woeid) {
-	// return queryPlaceList(Table.GEO_PLACES_SIBLING, "sibling_woeid=\""
-	// + woeid + "\"");
-	// }
-	//
-	// private static List<Place> queryPlaceList(String query) {
-	// return queryPlaceList(Table.GEO_PLACE, query);
-	// }
-	//
-	// // TODO create a generic query after the bug is fixed in jackson:
-	// //
-	// http://jira.codehaus.org/browse/JACKSON-479?page=com.atlassian.jira.plugin.system.issuetabpanels%3Aall-tabpanel
+	/**
+	 * Query against the geo.places.parent table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceResult> getPlaceParent(int woeid) {
+		return new Query<PlaceResult>(Table.GEO_PLACES_PARENT, "child_woeid=\""
+				+ woeid + "\"", getCommand());
+	}
 
+	/**
+	 * Query against the geo.places.belongtos table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceListResult> getPlaceBelongtos(int woeid) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_BELONGSTOS,
+				"member_woeid=\"" + woeid + "\"", getListCommand());
+	}
+
+	public static Query<PlaceListResult> getPlaceBelongtos(int woeid,
+			PlaceTypes place) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_BELONGSTOS,
+				"member_woeid=\"" + woeid + "\" and placetype=\"" + place
+						+ "\"", getListCommand());
+	}
+
+	/**
+	 * Query against the geo.places.children table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceListResult> getPlaceChildren(int woeid) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_CHILDREN,
+				"parent_woeid=\"" + woeid + "\"", getListCommand());
+	}
+
+	public static Query<PlaceListResult> getPlaceChildren(int woeid,
+			PlaceTypes place) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_CHILDREN,
+				"parent_woeid=\"" + woeid + "\" and placetype=\"" + place
+						+ "\"", getListCommand());
+	}
+
+	/**
+	 * Query against the geo.places.common table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceListResult> getPlaceCommon(int[] woeids) {
+		int l = woeids.length;
+		if (l < 2 || l > 7) {
+			throw new IllegalArgumentException(
+					"the query needs 2 woeids min and max 7");
+		}
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < woeids.length; i++) {
+			sb.append("woeid" + (i + 1) + "=\"");
+			sb.append(woeids[i] + "\"");
+			if (i < l - 1) {
+				sb.append(" and ");
+			}
+
+		}
+
+		return new Query<PlaceListResult>(Table.GEO_PLACES_COMMON,
+				sb.toString(), getListCommand());
+	}
+
+	/**
+	 * Query against the geo.places.ancestors table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceListResult> getPlaceAncestors(int woeid) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_ANCESTORS,
+				"descendant_woeid=\"" + woeid + "\"", getListCommand());
+	}
+
+	/**
+	 * Query against the geo.places.n table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceListResult> getPlaceNeighbor(int woeid) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_NEIGHBORS,
+				"neighbor_woeid=\"" + woeid + "\"", getListCommand());
+	}
+
+	/**
+	 * Query against the geo.places.ancestors table
+	 *
+	 * @param woeid
+	 * @return
+	 */
+	public static Query<PlaceListResult> getPlaceSibling(int woeid) {
+		return new Query<PlaceListResult>(Table.GEO_PLACES_SIBLINGS,
+				"sibling_woeid=\"" + woeid + "\"", getListCommand());
+	}
+
+	/**
+	 * TODO create a generic query after the bug is fixed in jackson:
+	 *
+	 * http://jira.codehaus.org/browse/JACKSON-479?page=com.atlassian.jira.
+	 * plugin.system.issuetabpanels%3Aall-tabpanel
+	 *
+	 * @return
+	 */
 	private static QueryCommand<PlaceListResult> getListCommand() {
 		QueryCommand<PlaceListResult> command = new QueryCommand<PlaceListResult>() {
 			@Override

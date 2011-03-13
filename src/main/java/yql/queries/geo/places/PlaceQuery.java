@@ -22,7 +22,7 @@ import yql.pojos.geo.places.PlaceTypes;
 import yql.queries.Query;
 import yql.queries.QueryCommand;
 
-public class QueryPlace {
+public class PlaceQuery {
 
 	/**
 	 * Query against the geo.places table
@@ -192,9 +192,11 @@ public class QueryPlace {
 
 	/**
 	 * TODO create a generic query after the bug is fixed in jackson:
-	 *
 	 * http://jira.codehaus.org/browse/JACKSON-479?page=com.atlassian.jira.
 	 * plugin.system.issuetabpanels%3Aall-tabpanel
+	 *
+	 * TODO: first try to get a list of results when it fail try to get a single
+	 * result and return a list with just one entry
 	 *
 	 * @return
 	 */
